@@ -1,0 +1,18 @@
+The target workflow is (with appropriate authors mapping):
+
+- Initialization
+  - subgit configure --layout auto https://svnpe3e.michelin.com/Svn/Kooroo/Proto/PBLab/SubGit SubGitMirror.git
+  - subgit install SubGitMirror.git
+  - git clone SubGitMirror.git SubGitBIB.git
+  - git clone https://github.com/MrBloo63/SubGitOCC.git SubGitOCC.git
+  - git checkout BR_OCC
+
+- Svn to Git sync configuration (scheduled)
+  - cd SubGitBIB
+  - git pull
+  - git push [--force] https://github.com/MrBloo63/SubGitOCC.git master
+
+- Git to Svn sync configuration (scheduled)
+  - cd SubGitOCC
+  - git pull
+  - git push SubGitMirror.git
