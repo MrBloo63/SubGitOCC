@@ -16,14 +16,14 @@ fm00884 = bau <noreply@michelin.com>
   - subgit install SubGitMirror.git
   - git clone SubGitMirror.git SubGitBIB.git
   - git clone https://github.com/MrBloo63/SubGitOCC.git SubGitOCC.git
-  - git checkout BR_OCC
 
 - Svn to Git sync configuration (scheduled)
-  - cd SubGitBIB
+  - cd SubGitBIB.git
   - git pull
   - git push [--force] https://github.com/MrBloo63/SubGitOCC.git master
 
 - Git to Svn sync configuration (scheduled)
-  - cd SubGitOCC
+  - cd SubGitOCC.git
+  - git checkout -b BR_OCC
   - git pull
-  - git push SubGitMirror.git
+  - git push SubGitMirror.git BR_OCC
