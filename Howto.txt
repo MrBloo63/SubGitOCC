@@ -1,4 +1,15 @@
-The target workflow is (with appropriate authors mapping):
+# subgit/config
+
+[svn]
+	trunk = Trunk:refs/heads/master
+	branches = Branches/BR_*:refs/heads/*
+
+# subgit/authors.txt
+
+f287719 = pbl <pascal.bleuyard@michelin.com>
+fm00884 = bau <noreply@michelin.com>
+
+# Target workflow
 
 - Initialization
   - subgit configure --layout auto https://svnpe3e.michelin.com/Svn/Kooroo/Proto/PBLab/SubGit SubGitMirror.git
