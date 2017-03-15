@@ -1,18 +1,39 @@
-The target workflow is (with appropriate authors mapping):
+# subgit/config
+
+[svn]
+	trunk = Trunk:refs/heads/master
+	branches = Branches/BR_*:refs/heads/BR_*
+
+# subgit/authors.txt
+
+f287719 = pbl <pascal.bleuyard@michelin.com>
+fm00884 = bau <noreply@michelin.com>
+
+# Target workflow
 
 - Initialization
   - subgit configure --layout auto https://svnpe3e.michelin.com/Svn/Kooroo/Proto/PBLab/SubGit SubGitMirror.git
   - subgit install SubGitMirror.git
+  - subgit register --key subgit.key SubGitMirror.git/
   - git clone SubGitMirror.git SubGitBIB.git
-  - git clone https://github.com/MrBloo63/SubGitOCC.git SubGitOCC.git
+  - git clone https://github.com/MrBloo63/SubGitOCC.git SubGitOCC.git  - cd SubGitBIB.git
+  - git remote add svntogit https://github.com/MrBloo63/SubGitOCC.git
+  - git push --force svntogit master
   - git checkout BR_OCC
+  - git push svntogit BR_OCC
+  - cd SubGitOCC.git
+  - git checkout BR_OCC
+  - git remote add gittosvn ../SubGitMirror.git
 
 - Svn to Git sync configuration (scheduled)
-  - cd SubGitBIB
+  - cd SubGitBIB.git
   - git pull
-  - git push [--force] https://github.com/MrBloo63/SubGitOCC.git master
+  - git push svntogit master
 
 - Git to Svn sync configuration (scheduled)
-  - cd SubGitOCC
+  - cd SubGitOCC.git
   - git pull
-  - git push SubGitMirror.git
+  - git push gittosvn BR_OCC
+
+- Shutdown
+  - subgit uninstall SubGitMirror.git
